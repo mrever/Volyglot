@@ -2,11 +2,11 @@ if has('python3')
 
 let $PYPLUGPATH .= expand('<sfile>:p:h') "used to import .py files from plugin directory
 
-command! Volyglot normal  :vsp<enter><c-w><c-l>:e ~/pythonbuff.py<cr>:call Volyglotload()<cr>:sp<cr>:e test.py<cr><c-w><c-h>:set filetype=python<cr>:echo "c-\\ to execute python, m-enter to execute vimscript"<cr>
+command! Volyglot normal  :vsp<enter><c-w><c-l>:e ~/volybuff.py<cr>:call Volyglotload()<cr>:sp<cr>:e test.py<cr><c-w><c-h>:set filetype=python<cr>:echo "c-\\ to execute python, m-enter to execute vimscript"<cr>
 command! VolyglotSelenium normal  :py3 voly.selenium_init()<cr>
 command! VolyglotSeleniumOff normal  :py3 voly.selenium=False; voly.outhtml=False<cr>
 command! VolyglotClear normal  :py3 voly.clearbuffhtml()<cr>
-nnoremap <silent> <F10> :vsp<enter><c-w><c-l>:e ~/pythonbuff.py<cr>:call Volyglotload()<cr>:sp<cr>:e test.py<cr><c-w><c-h>:set filetype=python<cr>:echo "c-\\ to execute python, m-enter to execute vimscript"<cr>
+nnoremap <silent> <F10> :vsp<enter><c-w><c-l>:e ~/volybuff.py<cr>:call Volyglotload()<cr>:sp<cr>:e test.py<cr><c-w><c-h>:set filetype=python<cr>:echo "c-\\ to execute python, m-enter to execute vimscript"<cr>
 
 func! Volyglotload()
 
@@ -150,7 +150,7 @@ class voly_outputter():
         if numlines > 9:
             thiswin = vim.current.window
             for win in vim.current.tabpage.windows:
-                if 'pythonbuff' in win.buffer.name:
+                if 'volybuff' in win.buffer.name:
                     vim.current.window = win
                     vim.command('normal G' + str(numlines-3)+'kV' +str(numlines-5)+'jzf')
             vim.current.window = thiswin
@@ -228,7 +228,7 @@ class voly_outputter():
     def scrollbuffend(vyself):
         thiswin = vim.current.window
         for win in vim.current.tabpage.windows:
-            if 'pythonbuff' in win.buffer.name:
+            if 'volybuff' in win.buffer.name:
                 vim.current.window = win
                 vim.command('normal G')
         vim.current.window = thiswin
@@ -272,11 +272,11 @@ class voly_outputter():
         vyself.outhtml = True
 
     def refselenium(vyself):
-        vyself.browser.get(f'file:///C:{vyself.hometmp}pythonbuff.html')
+        vyself.browser.get(f'file:///C:{vyself.hometmp}volybuff.html')
         vyself.browser.execute_script( "window.scrollTo(0, document.body.scrollHeight);" )
 
     def writebuffhtml(vyself, string, br=2, shownum=False, pre=True):
-        with open(vyself.hometmp + "pythonbuff.html", 'a', encoding='utf-8') as f:
+        with open(vyself.hometmp + "volybuff.html", 'a', encoding='utf-8') as f:
             if shownum:
                 string = 'Out [' + str(vyself.linecount) + ']: ' + string
                 #string = 'Out [' + str(len(vyself.htmlbuff)+1) + ']: ' + string
@@ -292,7 +292,7 @@ class voly_outputter():
 
     def clearbuffhtml(vyself, string=''):
         header = '<!DOCTYPE html>\n<html lang="en">\n<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.css" integrity="sha384-zB1R0rpPzHqg7Kpt0Aljp8JPLqbXI3bhnPWROx27a9N0Ll6ZP/+DiW/UqRcLbRjq" crossorigin="anonymous">\n  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.js" integrity="sha384-y23I5Q6l+B6vatafAwxRu/0oK/79VlbSz7Q9aiSZUvyWYIYsd+qj+o24G5ZU2zJz" crossorigin="anonymous"></script>\n  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/contrib/auto-render.min.js" integrity="sha384-kWPLUVMOks5AQFrykwIup5lo0m3iMkkHrD0uJ4H5cjeGihAutqP0yW0J6dpFiVkI" crossorigin="anonymous" onload="renderMathInElement(document.body);"></script>\n        with'
-        with open(vyself.hometmp + "pythonbuff.html", 'w') as f:
+        with open(vyself.hometmp + "volybuff.html", 'w') as f:
             f.write(header)
             f.write(string)
             if string:
