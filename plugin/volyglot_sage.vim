@@ -6,6 +6,7 @@ py3 << EOL
 voly.sage_On = True
 try:
     from sage.all import *
+    x = var('x') # sage does this by default
     def _sageparse(sagestr):
         return '\n'.join(preparse(sagestr).split('\n')[:])
     if '_blank' not in globals():
