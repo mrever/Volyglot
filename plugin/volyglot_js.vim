@@ -18,7 +18,7 @@ try:
         return '\n'.join(code)
     def _jstrans(code):
         trans = js2py.translate_js(code)
-        newcode = '\n'.join( trans.split('\n')[4:]  )
+        newcode = '\n'.join( trans.split('\n')[:]  )
         return newcode
     def _jsget(varname):
         return _jsvar.get(varname).to_python()
