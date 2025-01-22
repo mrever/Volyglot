@@ -214,8 +214,8 @@ quad1, quad2 = quadratic2(2.0, -2.0, -12.0)
 println("result 1: ", quad1)
 println("result 2: ", quad2)
 
+# we can import libraries if they're installed
 using FFTW
-using Plots
 
 N = 21
 xj = (0:N-1)*2*π/N
@@ -227,11 +227,15 @@ shifted_k = fftshift(fftfreq(N)*N)
 original_fft = fft(f)
 shifted_fft = fftshift(fft(f))
 
-p1 = plot(original_k,abs.(original_fft),title="Original FFT Coefficients", xticks=original_k[1:2:end], legend=false, ylims=(0,70));
-p1 = plot!([1,7,18],abs.(original_fft[[1,7,18]]),markershape=:circle,markersize=6,linecolor="white");
-p2 = plot(shifted_k,abs.(shifted_fft),title="Shifted FFT Coefficients",xticks=shifted_k[1:2:end], legend=false, ylims=(0,70));
-p2 = plot!([-4,0,6],abs.(shifted_fft[[7,11,17]]),markershape=:circle,markersize=6,linecolor="white");
-plot(p1,p2,layout=(2,1))
+# Plotting via julia does not work at the moment due to julia-python bridge limitations.
+# However, it's very easy to pass data python ↔ julia.
+
+# <c-\> to run this with python
+plt.figure()
+plt.plot(np.abs(_julmain.shifted_fft))
+plt.show()
+
+# _julmain (short for julia.Main, which you can import) can read/set vars from/to julia's namespace
 
 
 ∯∯∯∯∯∯∯∯∯∯∯∯∯∯∯∯∯∯∯∯∯∯∯∯∯∯∯∯∯∯∯∯∯∯∯∯∯∯∯∯∯∯∯∯∯∯∯∯∯∯
