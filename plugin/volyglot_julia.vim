@@ -15,7 +15,7 @@ try:
         languagemgr.langevals = []
         languagemgr.langcompleters = []
     import vim
-    from julia import Main as _jumain
+    from julia import Main as _julmain
 
     nprint = '''
     import Base.print
@@ -42,15 +42,15 @@ try:
     using REPL
     '''
 
-    _jumain.eval(nprint)
+    _julmain.eval(nprint)
     def _resjprint():
-        _jumain.eval('pyoutstr = ""')
+        _julmain.eval('pyoutstr = ""')
     _resjprint()
 
     def _jeval(jcode):
         _resjprint()
-        julout = _jumain.eval(jcode)
-        out = _jumain.eval('print("")')
+        julout = _julmain.eval(jcode)
+        out = _julmain.eval('print("")')
         print(out)
         return julout
 
@@ -67,7 +67,7 @@ try:
         completions = [] 
         try:
             jcompstr = 'jcompletions = REPL.REPLCompletions.completions("' + token +  '", ' + str(len(token)) + '); [string(jcompletions[1][i].mod) for i = 1:length(jcompletions[1])  ]'
-            jcomps = _jumain.eval(jcompstr)
+            jcomps = _julmain.eval(jcompstr)
             if token[-1] == '.':
                 jcomps = [token + jc for jc in jcomps]
             completions += jcomps
