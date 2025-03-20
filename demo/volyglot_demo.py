@@ -3,8 +3,9 @@ Volyglot
 Vim + Polyglot (one who is multilingual)
 => Volyglot is a multilingual execution environment in Vim & variants.
 
-It's' a plugin for Vim/gVim/Neovim that let's' you execute code in multiple scripting languages right within your editor
+It′s a plugin for Vim/gVim/Neovim that let′s you execute code in multiple scripting languages right within your editor
 Great for interactive development & debugging, or for trying out new languages
+
 
 Languages supported:
     ▷   Python

@@ -131,9 +131,10 @@ from types import SimpleNamespace
 
 from traitlets.config.configurable import Configurable
 from IPython.core.error import TryNext
-from IPython.core.inputsplitter import ESC_MAGIC
+# from IPython.core.inputsplitter import ESC_MAGIC
+ESC_MAGIC = '%'
 from IPython.core.latex_symbols import latex_symbols, reverse_latex_symbol
-from IPython.core.oinspect import InspectColors
+# from IPython.core.oinspect import InspectColors
 from IPython.utils import generics
 from IPython.utils.dir2 import dir2, get_real_method
 from IPython.utils.process import arg_split
@@ -1299,7 +1300,8 @@ class IPCompleter(Completer):
 
         if len(texts) == 2 and (texts[0] == 'colors' or texts[0] == '%colors'):
             prefix = texts[1]
-            return [ color for color in InspectColors.keys()
+            return [ color for color in []
+            # return [ color for color in InspectColors.keys()
                      if color.startswith(prefix) ]
         return []
 
