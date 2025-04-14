@@ -4,7 +4,7 @@
 "inoremap <silent> <m-enter> <esc>mPV"py:@p<cr>`Pa
 "vnoremap <silent> <m-enter> mP"py:@p<cr>`P
 
-command Vimscript normal :call Vimscript()<cr>:echo "m-\\ to execute julia"<cr>
+command Vimscript normal :call Vimscript()<cr>:echo "m-enter to execute vimscript"<cr>
 
 func! Vimscript()
 
