@@ -10,17 +10,16 @@ nnoremap <silent> <F10> :vsp<enter><c-w><c-l>:e ~/volybuff.py<cr>:call Volyglotl
 
 func! Volyglotload()
 
-nnoremap <silent> <F5>      mPggVG"py:py3 voly.output()<cr>:redir @b<cr>:py3 exec(voly.filtcode())<cr>:redir END<cr>:py3 voly.smartprint(vim.eval("@b"))<cr>`P
-inoremap <silent> <F5> <esc>mPggVG"py:py3 voly.output()<cr>:redir @b<cr>:py3 exec(voly.filtcode())<cr>:redir END<cr>:py3 voly.smartprint(vim.eval("@b"))<cr>`Pa
-vnoremap <silent> <F5> mP<esc>ggVG"py:py3 voly.output()<cr>:redir @b<cr>:py3 exec(voly.filtcode())<cr>:redir END<cr>:py3 voly.smartprint(vim.eval("@b"))<cr>`P
-
-nnoremap <silent> <s-enter>      mPV"py:py3 voly.output()<cr>:redir @b<cr>:py3 exec(voly.filtcode())<cr>:redir END<cr>:py3 voly.smartprint(vim.eval("@b"))<cr>`P
-inoremap <silent> <s-enter> <esc>mPV"py:py3 voly.output()<cr>:redir @b<cr>:py3 exec(voly.filtcode())<cr>:redir END<cr>:py3 voly.smartprint(vim.eval("@b"))<cr>`Pa
-vnoremap <silent> <s-enter>       mP"py:py3 voly.output()<cr>:redir @b<cr>:py3 exec(voly.filtcode())<cr>:redir END<cr>:py3 voly.smartprint(vim.eval("@b"))<cr>`P
-"alternate mappings for terminal/ssh usage
-nnoremap <silent> <c-\>      mPV"py:py3 voly.output()<cr>:redir @b<cr>:py3 exec(voly.filtcode())<cr>:redir END<cr>:py3 voly.smartprint(vim.eval("@b"))<cr>`P
-inoremap <silent> <c-\> <esc>mPV"py:py3 voly.output()<cr>:redir @b<cr>:py3 exec(voly.filtcode())<cr>:redir END<cr>:py3 voly.smartprint(vim.eval("@b"))<cr>`Pa
-vnoremap <silent> <c-\>       mP"py:py3 voly.output()<cr>:redir @b<cr>:py3 exec(voly.filtcode())<cr>:redir END<cr>:py3 voly.smartprint(vim.eval("@b"))<cr>`P
+let s:voly_cmd = ':py3 voly.output()<cr>:redir @b<cr>:py3 exec(voly.filtcode())<cr>:redir END<cr>:py3 voly.smartprint(vim.eval("@b"))<cr>'
+let s:maps = [{'key':'<F5>','pre':{'n':'mPggVG"py','i':'<esc>mPggVG"py','v':'mP<esc>ggVG"py'}},
+            \ {'key':'<S-Enter>','pre':{'n':'mPV"py','i':'<esc>mPV"py','v':'mP"py'}},
+            \ {'key':"<C-\\>",'pre':{'n':'mPV"py','i':'<esc>mPV"py','v':'mP"py'}}]
+for m in s:maps
+  for mode in keys(m.pre)
+    let suf = mode ==# 'i' ? '`Pa' : '`P'
+    execute printf('%snoremap <silent> %s %s%s%s', mode, m.key, m.pre[mode], s:voly_cmd, suf)
+  endfor
+endfor
 
 nnoremap <silent> <c-b>      mPV"py:py3 voly.printexp()<cr>`P
 inoremap <silent> <c-b> <esc>mPV"py:py3 voly.printexp()<cr>`Pa
