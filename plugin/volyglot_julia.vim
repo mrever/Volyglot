@@ -44,7 +44,8 @@ try:
     '''
 
     def _julneweval(jcode):
-        return _julmain.eval(_julmain.Meta.parse(jcode.replace('\n',';')))
+        #return _julmain.eval(_julmain.Meta.parseall(jcode.replace('\n',';')))
+        return _julmain.eval(_julmain.Meta.parseall(jcode))
 
     _julneweval(nprint)
     def _resjprint():
