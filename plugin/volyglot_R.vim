@@ -20,7 +20,9 @@ try:
         code = [q for q in vim.eval("@p").split('\n') if q and len(q)>0]
         return '\n'.join(code)
     def _revexpr(expr):
-        return robjects.r(expr)
+        from rpy2.robjects import conversion, default_converter
+        with conversion.localconverter(default_converter):
+            return robjects.r(expr)
     languagemgr.langlist.append("R")
     languagemgr.langevals.append(_revexpr)
 except Exception as e:
