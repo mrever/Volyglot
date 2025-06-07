@@ -2,7 +2,7 @@ if has('python3')
 
 let $PYPLUGPATH .= expand('<sfile>:p:h') "used to import .py files from plugin directory
 
-command! Volyglot normal  :vsp<enter><c-w><c-l>:e ~/volybuff.py<cr>:call Volyglotload()<cr>:sp<cr>:e test.py<cr><c-w><c-h>:set filetype=python<cr>:echo "c-\\ to execute python, m-enter to execute vimscript"<cr>
+command! Volyglot normal  :vsp<enter><c-w><c-l>:e ~/volybuff.py<cr>:call Volyglotload()<cr>:sp<cr>:e test.py<cr><c-w><c-h>:set filetype=python<cr>:echo "c-\\ to execute python"<cr>
 command! VolyglotSelenium normal  :py3 voly.selenium_init()<cr>
 command! VolyglotSeleniumOff normal  :py3 voly.selenium=False; voly.outhtml=False<cr>
 command! VolyglotClear normal  :py3 voly.clearbuffhtml()<cr>
