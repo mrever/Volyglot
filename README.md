@@ -3,7 +3,7 @@
 
 Volyglot -- Vim + polyglot    \(***Speaking, writing, written in, or composed of several languages***\)
 
-<div>https://asciinema.org/a/NI3ba7dOjtYsevfDWCm6lQwxB</div>
+<div><p><script src="https://asciinema.org/a/NI3ba7dOjtYsevfDWCm6lQwxB.js" id="asciicast-NI3ba7dOjtYsevfDWCm6lQwxB" async="true"></script><p></div>
 
 *Features:*
 
