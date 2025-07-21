@@ -271,7 +271,10 @@ class voly_outputter():
         vyself.outhtml = True
 
     def refselenium(vyself):
-        vyself.browser.get(f'file:///C:{vyself.hometmp}volybuff.html')
+        volyhtmlfname = f'C:{vyself.hometmp}volybuff.html'
+        if not os.path.exists(volyhtmlfname):
+            vyself.clearbuffhtml()
+        vyself.browser.get('file:///'+volyhtmlfname)
         vyself.browser.execute_script( "window.scrollTo(0, document.body.scrollHeight);" )
 
     def writebuffhtml(vyself, string, br=2, shownum=False, pre=True):
@@ -290,7 +293,7 @@ class voly_outputter():
             vyself.refselenium()
 
     def clearbuffhtml(vyself, string=''):
-        header = '<!DOCTYPE html>\n<html lang="en">\n<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.css" integrity="sha384-zB1R0rpPzHqg7Kpt0Aljp8JPLqbXI3bhnPWROx27a9N0Ll6ZP/+DiW/UqRcLbRjq" crossorigin="anonymous">\n  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.js" integrity="sha384-y23I5Q6l+B6vatafAwxRu/0oK/79VlbSz7Q9aiSZUvyWYIYsd+qj+o24G5ZU2zJz" crossorigin="anonymous"></script>\n  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/contrib/auto-render.min.js" integrity="sha384-kWPLUVMOks5AQFrykwIup5lo0m3iMkkHrD0uJ4H5cjeGihAutqP0yW0J6dpFiVkI" crossorigin="anonymous" onload="renderMathInElement(document.body);"></script>\n        with'
+        header = '<!DOCTYPE html>\n<html lang="en">\n<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.css" integrity="sha384-zB1R0rpPzHqg7Kpt0Aljp8JPLqbXI3bhnPWROx27a9N0Ll6ZP/+DiW/UqRcLbRjq" crossorigin="anonymous">\n  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.js" integrity="sha384-y23I5Q6l+B6vatafAwxRu/0oK/79VlbSz7Q9aiSZUvyWYIYsd+qj+o24G5ZU2zJz" crossorigin="anonymous"></script>\n  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/contrib/auto-render.min.js" integrity="sha384-kWPLUVMOks5AQFrykwIup5lo0m3iMkkHrD0uJ4H5cjeGihAutqP0yW0J6dpFiVkI" crossorigin="anonymous" onload="renderMathInElement(document.body);"></script>\n'
         with open(vyself.hometmp + "volybuff.html", 'w') as f:
             f.write(header)
             f.write(string)
