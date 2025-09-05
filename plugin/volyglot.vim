@@ -271,10 +271,14 @@ class voly_outputter():
         vyself.outhtml = True
 
     def refselenium(vyself):
-        volyhtmlfname = f'C:{vyself.hometmp}volybuff.html'
-        if not os.path.exists(volyhtmlfname):
+        import platform
+        if 'windows' in platform.system().lower():
+            voly.htmlfname = f'C:{vyself.hometmp}volybuff.html'
+        else:
+            voly.htmlfname = f'{vyself.hometmp}volybuff.html'
+        if not os.path.exists(voly.htmlfname):
             vyself.clearbuffhtml()
-        vyself.browser.get('file:///'+volyhtmlfname)
+        vyself.browser.get('file:///'+voly.htmlfname)
         vyself.browser.execute_script( "window.scrollTo(0, document.body.scrollHeight);" )
 
     def writebuffhtml(vyself, string, br=2, shownum=False, pre=True):
